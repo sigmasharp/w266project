@@ -56,7 +56,9 @@ import nltk
 import vocabulary
 
 def get_corpus(name="brown"):
-    return nltk.corpus.__getattr__(name)
+    if name=='brown':
+        return nltk.corpus.__getattr__(name)
+    return nltk.corpus.PlaintextCorpusReader('./', 'text.txt')
 
 def build_vocab(corpus, V=10000):
     token_feed = (canonicalize_word(w) for w in corpus.words())
