@@ -104,9 +104,9 @@ def load_corpus(name, sname, split=0.8, V=10000, shuffle=0):
     vocab = build_vocab(corpus, V)
     train_sentences, test_sentences = get_train_test_sents(corpus, split, shuffle)
     train_ids = preprocess_sentences(train_sentences, vocab)
-    train_target = 
+    #train_target = 
     test_ids = preprocess_sentences(test_sentences, vocab)
-    test_target =
+    #test_target =
     return vocab, train_ids, train_sids, test_ids, test_sids
 
 ##
