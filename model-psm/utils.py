@@ -4,6 +4,8 @@ import itertools
 import numpy as np
 import pandas as pd
 from IPython.display import display
+senti = [0, 1, 3, 5, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 59, 61, 62, 63, 70, 71, 72, 75, 76, 78]
+sentid = {0: 0, 1: 1, 3: 2, 5: 3, 9: 4, 10: 5, 11: 6, 12: 7, 13: 8, 14: 9, 15: 10, 16: 11, 17: 12, 18: 13, 19: 14, 20: 15, 21: 16, 22: 17, 23: 18, 24: 19, 25: 20, 26: 21, 27: 22, 28: 23, 29: 24, 30: 25, 31: 26, 32: 27, 33: 28, 34: 29, 35: 30, 36: 31, 37: 32, 38: 33, 39: 34, 40: 35, 41: 36, 42: 37, 43: 38, 44: 39, 45: 40, 46: 41, 47: 42, 48: 43, 49: 44, 50: 45, 51: 46, 52: 47, 53: 48, 54: 49, 55: 50, 56: 51, 57: 52, 59: 53, 61: 54, 62: 55, 63: 56, 70: 57, 71: 58, 72: 59, 75: 60, 76: 61, 78: 62}
 
 def flatten(list_of_lists):
     """Flatten a list-of-lists into a single list."""
@@ -101,6 +103,7 @@ def load_corpus(name, split=0.8, V=10000, shuffle=0):
     vocab = build_vocab(corpus, V)
     train_sentences, test_sentences = get_train_test_sents(corpus, split, shuffle)
     train_ids = preprocess_sentences(train_sentences, vocab)
+    #target_ids = 
     test_ids = preprocess_sentences(test_sentences, vocab)
     return vocab, train_ids, test_ids
 
