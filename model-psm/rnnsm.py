@@ -47,7 +47,7 @@ def MakeFancyRNNCell(H, keep_prob, num_layers=1):
 
 class RNNSM(object):
 
-  def __init__(self, V, H, num_layers=1):
+  def __init__(self, V, Z, H, num_layers=1):
     """Init function.
 
     This function just stores hyperparameters. You'll do all the real graph
@@ -61,6 +61,7 @@ class RNNSM(object):
     # Model structure; these need to be fixed for a given model.
     self.V = V
     self.H = H
+    self.Z = Z
     self.num_layers = num_layers #*** took out the 1 and replaced it with num_layers
 
     # Training hyperparameters; these can be changed with feed_dict,
@@ -188,17 +189,17 @@ class RNNSM(object):
     # Softmax output layer, over vocabulary
     # Hint: use the matmul3d() helper here.
     
-    # Wout of shape(H, V), the output layer weight matrix, and 
-    # bout of shape(V), the output layer bias vector
-    self.Wout_ = tf.Variable(tf.random_uniform([self.H, self.V], minval=-1.0, maxval=1.0, seed=self.seed), name="Wout")
-    self.bout_ = tf.Variable(tf.zeros([self.V]), dtype=tf.float32, name="b")
+    # Wout of shape(H, Z), the output layer weight matrix, and 
+    # bout of shape(Z), the output layer bias vector
+    self.Wout_ = tf.Variable(tf.random_uniform([self.H, self.Z], minval=-1.0, maxval=1.0, seed=self.seed), name="Wout")
+    self.bout_ = tf.Variable(tf.zeros([self.Z]), dtype=tf.float32, name="b")
     
     # logits of shape(b, t, H), the logits from the output layer, for the whole RNNLM
-    self.logits_ = tf.reshape(matmul3d(self.output_, self.Wout_) + self.bout_, [self.batch_size_, self.max_time_, self.V])
+    self.logits_ = tf.reshape(matmul3d(self.output_, self.Wout_) + self.bout_, [self.batch_size_, self.max_time_, self.Z])
     #print self.logits_.get_shape()
     
     # y^hat of shape(b, t), the softmax from the logits
-    self.y_hat_ = tf.reshape(tf.argmax(tf.reshape(self.logits_, [-1, self.V]), 1, name="y_hat"), [self.batch_size_, self.max_time_])
+    self.y_hat_ = tf.reshape(tf.argmax(tf.reshape(self.logits_, [-1, self.Z]), 1, name="y_hat"), [self.batch_size_, self.max_time_])
     #print self.y_hat_.get_shape()
     
     # Loss computation (true loss, for prediction)
@@ -235,7 +236,7 @@ class RNNSM(object):
       self.num_sampled = 100
       self.train_loss_ = tf.reduce_sum(tf.nn.sampled_softmax_loss(tf.transpose(self.Wout_), self.bout_, 
           tf.reshape(self.output_, [-1, self.H]), labels=tf.reshape(self.target_y_, [-1,1]), num_sampled=self.num_sampled, 
-          num_classes=self.V, name='train_loss'))
+          num_classes=self.Z, name='train_loss'))
       #self.train_loss_ = self.loss_
       
 
@@ -265,7 +266,7 @@ class RNNSM(object):
     #self.pred_proba_ = tf.nn.softmax(self.logits_, name="pred_proba")
     #self.pred_max_ = tf.argmax( self. logits_, 1, name="pred_max")
 
-    self.pred_samples_ = tf.reshape(tf.multinomial(tf.reshape(self.logits_, [-1, self.V]), 1), [self.batch_size_, self.max_time_, 1])
+    self.pred_samples_ = tf.reshape(tf.multinomial(tf.reshape(self.logits_, [-1, self.Z]), 1), [self.batch_size_, self.max_time_, 1])
     
 
     #### END(YOUR CODE) ####

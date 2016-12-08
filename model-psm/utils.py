@@ -97,15 +97,17 @@ def preprocess_sentences(sentences, vocab):
 
 ##
 # Use this function
-def load_corpus(name, split=0.8, V=10000, shuffle=0):
+def load_corpus(name, sname, split=0.8, V=10000, shuffle=0):
     """Load a named corpus and split train/test along sentences."""
     corpus = get_corpus(name)
+    senti = [int(line[:-2]) if len(line[:-2])!=0 else int(line[:]) for line in open('./senti.txt')]
     vocab = build_vocab(corpus, V)
     train_sentences, test_sentences = get_train_test_sents(corpus, split, shuffle)
     train_ids = preprocess_sentences(train_sentences, vocab)
-    #target_ids = 
+    train_target = 
     test_ids = preprocess_sentences(test_sentences, vocab)
-    return vocab, train_ids, test_ids
+    test_target =
+    return vocab, train_ids, train_sids, test_ids, test_sids
 
 ##
 # Use this function
