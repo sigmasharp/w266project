@@ -1,0 +1,20 @@
+A,Agilent Technologies Incorporated,1277790,03/14/2001,-0.00822542552325
+A,Agilent Technologies Incorporated,1280871,03/26/2001,-0.00335600105979
+A,Agilent Technologies Incorporated,1295233,05/21/2001,-0.02969348659
+A,Agilent Technologies Incorporated,1418787,08/26/2002,0.0433003684313
+A,Agilent Technologies Incorporated,1694980,08/15/2005,-0.0243087924666
+A,Agilent Technologies Incorporated,1695156,08/16/2005,0.0230450420408
+A,Agilent Technologies,1154338,11/18/1999,0.0
+A,Agilent Technologies,1154513,11/19/1999,0.0
+A,Agilent Technologies,1177151,02/17/2000,0.00826844344545
+A,Agilent Technologies,1204979,06/05/2000,0.172652616998
+A,Agilent Technologies,1216580,07/21/2000,0.0495593713092
+A,Agilent Technologies,1223465,08/18/2000,0.0986805720155
+A,Agilent Technologies,1239616,10/17/2000,-0.141690793283
+A,Agilent Technologies,1257055,12/21/2000,-0.0142283045509
+AAL,American Airlines Inc,1760363,05/09/2006,0.0930265520174
+AAL,American Airlines,1707126,10/04/2005,0.0
+AAL,American Airlines,1707581,10/06/2005,0.0
+AAL,American Airlines,1710534,10/18/2005,-0.0135371581177
+AAL,American Airlines,1712261,10/25/2005,-0.0148431665422
+AAL,American Airlines,1714047,11/01/2005,0.0674689661708
