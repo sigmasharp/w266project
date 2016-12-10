@@ -67,7 +67,11 @@ def build_vocab(corpus, V=10000):
     vocab = vocabulary.Vocabulary(token_feed, size=V)
     return vocab
 
-def get_train_test_sents(corpus, split=0.8, shuffle=True):
+def build_vocab_senti(sentis, Z=63):
+    vocab = vocabulary.Vocabulary(sentis, size=Z)
+    return vocab
+
+def get_train_test_sents(corpus, split=0.8, shuffle=False):
     """Get train and test sentences."""
     sentences = np.array(corpus.sents(), dtype=object)
     fmt = (len(sentences), sum(map(len, sentences)))
@@ -76,8 +80,7 @@ def get_train_test_sents(corpus, split=0.8, shuffle=True):
     if shuffle:
         rng = np.random.RandomState(shuffle)
         rng.shuffle(sentences)  # in-place
-    train_frac = 0.8
-    split_idx = int(train_frac * len(sentences))
+    split_idx = int(split * len(sentences))
     train_sentences = sentences[:split_idx]
     test_sentences = sentences[split_idx:]
 
@@ -97,16 +100,18 @@ def preprocess_sentences(sentences, vocab):
 
 ##
 # Use this function
-def load_corpus(name, sname, split=0.8, V=10000, shuffle=0):
+def load_corpus(name, sname, split=0.8, V=10000, Z=63, shuffle=False):
     """Load a named corpus and split train/test along sentences."""
     corpus = get_corpus(name)
-    senti = [int(line[:-2]) if len(line[:-2])!=0 else int(line[:]) for line in open('./senti.txt')]
+    senti = [int(line[:-2]) if len(line[:-2])!=0 else int(line) for line in open('./senti.txt')]
     vocab = build_vocab(corpus, V)
+    vocab_senti = build_vocab_senti(senti, Z)
     train_sentences, test_sentences = get_train_test_sents(corpus, split, shuffle)
     train_ids = preprocess_sentences(train_sentences, vocab)
-    #train_target = 
+    split_idx = int(split * len(senti))
+    train_sids = vocab.words_to_ids(senti[:split_idx])
     test_ids = preprocess_sentences(test_sentences, vocab)
-    #test_target =
+    test_sids = vocab.words_to_ids(senti[split_idx:])
     return vocab, train_ids, train_sids, test_ids, test_sids
 
 ##
