@@ -4,6 +4,7 @@ import time
 import tensorflow as tf
 import numpy as np
 
+
 def matmul3d(X, W):
   """Wrapper for tf.matmul to handle a 3D input tensor X.  Will perform multiplication along the last dimension.
      Args:X: [m,n,k]W: [k,l]  Returns:XW: [m,n,l]

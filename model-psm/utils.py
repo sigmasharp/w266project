@@ -4,22 +4,12 @@ import itertools
 import numpy as np
 import pandas as pd
 from IPython.display import display
-senti = [0, 1, 3, 5, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 59, 61, 62, 63, 70, 71, 72, 75, 76, 78]
-sentid = {0: 0, 1: 1, 3: 2, 5: 3, 9: 4, 10: 5, 11: 6, 12: 7, 13: 8, 14: 9, 15: 10, 16: 11, 17: 12, 18: 13, 19: 14, 20: 15, 21: 16, 22: 17, 23: 18, 24: 19, 25: 20, 26: 21, 27: 22, 28: 23, 29: 24, 30: 25, 31: 26, 32: 27, 33: 28, 34: 29, 35: 30, 36: 31, 37: 32, 38: 33, 39: 34, 40: 35, 41: 36, 42: 37, 43: 38, 44: 39, 45: 40, 46: 41, 47: 42, 48: 43, 49: 44, 50: 45, 51: 46, 52: 47, 53: 48, 54: 49, 55: 50, 56: 51, 57: 52, 59: 53, 61: 54, 62: 55, 63: 56, 70: 57, 71: 58, 72: 59, 75: 60, 76: 61, 78: 62}
 
 def flatten(list_of_lists):
     """Flatten a list-of-lists into a single list."""
     return list(itertools.chain.from_iterable(list_of_lists))
 
 def pretty_print_matrix(M, rows=None, cols=None, dtype=float):
-    """Pretty-print a matrix using Pandas.
-
-    Args:
-      M : 2D numpy array
-      rows : list of row labels
-      cols : list of column labels
-      dtype : data type (float or int)
-    """
     display(pd.DataFrame(M, index=rows, columns=cols, dtype=dtype))
 
 def pretty_timedelta(fmt="%d:%02d:%02d", since=None, until=None):
@@ -30,8 +20,6 @@ def pretty_timedelta(fmt="%d:%02d:%02d", since=None, until=None):
     hours, remainder = divmod(delta_s, 3600)
     minutes, seconds = divmod(remainder, 60)
     return fmt % (hours, minutes, seconds)
-
-
 ##
 # Word processing functions
 def canonicalize_digits(word):
@@ -56,24 +44,24 @@ def canonicalize_words(words, **kw):
 # Data loading functions
 import nltk
 import vocabulary
+from nltk.tokenize import word_tokenize
+import unicodedata
 
-def get_corpus(name="brown"):
+def get_sents(name="brown"):
     if name=='brown':
         return nltk.corpus.__getattr__(name)
-    return nltk.corpus.PlaintextCorpusReader('./', name)
 
-def build_vocab(corpus, V=10000):
-    token_feed = (canonicalize_word(w) for w in corpus.words())
+    return [word_tokenize(unicode(s.decode('utf-8').strip())) for s in open('./'+name)]
+
+def build_vocab(sents, V=10000):
+    words = flatten(sents)
+    token_feed = (canonicalize_word(w) for w in words)
     vocab = vocabulary.Vocabulary(token_feed, size=V)
     return vocab
 
-def build_vocab_senti(sentis, Z=63):
-    vocab = vocabulary.Vocabulary(sentis, size=Z)
-    return vocab
-
-def get_train_test_sents(corpus, split=0.8, shuffle=False):
+def get_train_test_sents(sents, split=0.8, shuffle=False):
     """Get train and test sentences."""
-    sentences = np.array(corpus.sents(), dtype=object)
+    sentences = np.array(sents, dtype=object)
     fmt = (len(sentences), sum(map(len, sentences)))
     print "Loaded %d sentences (%g tokens)" % fmt
 
@@ -98,30 +86,51 @@ def preprocess_sentences(sentences, vocab):
              for w in words]
     return np.array(vocab.words_to_ids(words))
 
+def preprocess_ssentences(sentences, ssentences, vocab):
+    #build corresponding sentiments
+    # Add sentence boundaries, canonicalize, and handle unknowns
+    #words = ["<s>"] + flatten(s + ["<s>"] for s in sentences)
+    #words = [canonicalize_word(w, wordset=vocab.word_to_id)
+    #         for w in words]
+    idx = 0
+    words = [int(ssentences[idx][0])]
+    for s in sentences:
+        ss = int(ssentences[idx][0])
+        for w in s:
+            words.append(ss)
+        words.append(ss)
+        idx = idx + 1
+    
+    #print vocab.ordered_words()
+    return np.array(vocab.words_to_ids(words))
+
 ##
 # Use this function
 def load_corpus(name, sname, split=0.8, V=10000, Z=63, shuffle=False):
     """Load a named corpus and split train/test along sentences."""
-    corpus = get_corpus(name)
-    senti = [int(line[:-2]) if len(line[:-2])!=0 else int(line) for line in open('./senti.txt')]
-    vocab = build_vocab(corpus, V)
-    vocab_senti = build_vocab_senti(senti, Z)
-    train_sentences, test_sentences = get_train_test_sents(corpus, split, shuffle)
+    sents = get_sents(name)   
+    vocab = build_vocab(sents, V)
+    ssents = get_sents(sname)
+    svocab = vocabulary.SVocabulary()
+    #print svocab.ordered_words()
+    #print svocab.words_to_ids(svocab.ordered_words())
+    train_sentences, test_sentences = get_train_test_sents(sents, split, shuffle)
     train_ids = preprocess_sentences(train_sentences, vocab)
-    split_idx = int(split * len(senti))
-    train_sids = vocab.words_to_ids(senti[:split_idx])
     test_ids = preprocess_sentences(test_sentences, vocab)
-    test_sids = vocab.words_to_ids(senti[split_idx:])
+    train_ssentences, test_ssentences = get_train_test_sents(ssents, split, shuffle)
+    train_sids = preprocess_ssentences(train_sentences, train_ssentences, svocab)
+    test_sids = preprocess_ssentences(test_sentences, test_ssentences, svocab)
     return vocab, train_ids, train_sids, test_ids, test_sids
 
 ##
 # Use this function
-def batch_generator(ids, batch_size, max_time):
+def batch_generator(ids, sids, batch_size, max_time):
     """Convert ids to data-matrix form."""
     # Clip to multiple of max_time for convenience
     clip_len = ((len(ids)-1) / batch_size) * batch_size
     input_w = ids[:clip_len]     # current word
-    target_y = ids[1:clip_len+1]  # next word
+    target_y = sids[:clip_len]  # the sents
+    print 'in batch_generator', len(ids), len(sids), len(input_w), len(target_y), clip_len, batch_size
     # Reshape so we can select columns
     input_w = input_w.reshape([batch_size,-1])
     target_y = target_y.reshape([batch_size,-1])
