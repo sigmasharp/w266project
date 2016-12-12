@@ -1,0 +1,6 @@
+model_checkpoint_path: "rnnlm_trained_not"
+all_model_checkpoint_paths: "rnnlm_not-2"
+all_model_checkpoint_paths: "rnnlm_not-3"
+all_model_checkpoint_paths: "rnnlm_not-4"
+all_model_checkpoint_paths: "rnnlm_not-5"
+all_model_checkpoint_paths: "rnnlm_trained_not"

@@ -56,6 +56,8 @@ import nltk
 import vocabulary
 
 def get_corpus(name="brown"):
+    if not name == "brown":
+        return nltk.corpus.PlaintextCorpusReader('./', name+'.txt')
     return nltk.corpus.__getattr__(name)
 
 def build_vocab(corpus, V=10000):
