@@ -130,7 +130,7 @@ def batch_generator(ids, sids, batch_size, max_time):
     clip_len = ((len(ids)-1) / batch_size) * batch_size
     input_w = ids[:clip_len]     # current word
     target_y = sids[:clip_len]  # the sents
-    print 'in batch_generator', len(ids), len(sids), len(input_w), len(target_y), clip_len, batch_size
+    #print 'in batch_generator', len(ids), len(sids), len(input_w), len(target_y), clip_len, batch_size
     # Reshape so we can select columns
     input_w = input_w.reshape([batch_size,-1])
     target_y = target_y.reshape([batch_size,-1])
