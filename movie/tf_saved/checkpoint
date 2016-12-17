@@ -1,0 +1,6 @@
+model_checkpoint_path: "rnnlm_trained_neg"
+all_model_checkpoint_paths: "rnnlm_neg-7"
+all_model_checkpoint_paths: "rnnlm_neg-8"
+all_model_checkpoint_paths: "rnnlm_neg-9"
+all_model_checkpoint_paths: "rnnlm_neg-10"
+all_model_checkpoint_paths: "rnnlm_trained_neg"

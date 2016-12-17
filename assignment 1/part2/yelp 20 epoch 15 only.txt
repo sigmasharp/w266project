@@ -1,0 +1,148 @@
+Fri, 16 Dec 2016 14:19:26
+Loaded 158246 sentences (3.19966e+06 tokens)
+Training set: 126596 sentences (2557036 tokens)
+Test set: 31650 sentences (642626 tokens)
+Fri, 16 Dec 2016 14:19:58
+
+# Training parameters
+max_time = 20
+batch_size = 50
+learning_rate = 0.5
+keep_prob = 1.0
+num_epochs = 20
+
+# Model parameters
+model_params = dict(V=V, 
+                    H=100, 
+                    num_layers=1)
+
+trained_filename = './tf_saved/rnnlm_trained' + '_' + lm_name
+
+
+Fri, 16 Dec 2016 14:19:58
+WARNING:tensorflow:From <ipython-input-11-66d61aafb82c>:16 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+WARNING:tensorflow:From <ipython-input-11-66d61aafb82c>:16 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+[epoch 1] Starting epoch 1
+[epoch 1] Completed in 0:06:17
+[epoch 1] Train set: avg. loss: 4.806  (perplexity: 122.23)
+[epoch 1] Test set: avg. loss: 4.872  (perplexity: 130.61)
+
+Fri, 16 Dec 2016 14:40:49
+[epoch 2] Starting epoch 2
+[epoch 2] Completed in 0:06:28
+[epoch 2] Train set: avg. loss: 4.636  (perplexity: 103.08)
+[epoch 2] Test set: avg. loss: 4.736  (perplexity: 113.99)
+
+Fri, 16 Dec 2016 15:01:45
+[epoch 3] Starting epoch 3
+[epoch 3] Completed in 0:06:03
+[epoch 3] Train set: avg. loss: 4.544  (perplexity: 94.09)
+[epoch 3] Test set: avg. loss: 4.672  (perplexity: 106.91)
+
+Fri, 16 Dec 2016 15:21:14
+[epoch 4] Starting epoch 4
+[epoch 4] Completed in 0:04:55
+[epoch 4] Train set: avg. loss: 4.474  (perplexity: 87.72)
+[epoch 4] Test set: avg. loss: 4.625  (perplexity: 102.00)
+
+Fri, 16 Dec 2016 15:39:32
+[epoch 5] Starting epoch 5
+[epoch 5] Completed in 0:04:35
+[epoch 5] Train set: avg. loss: 4.418  (perplexity: 82.97)
+[epoch 5] Test set: avg. loss: 4.590  (perplexity: 98.51)
+
+Fri, 16 Dec 2016 15:55:51
+[epoch 6] Starting epoch 6
+[epoch 6] Completed in 0:04:23
+[epoch 6] Train set: avg. loss: 4.376  (perplexity: 79.54)
+[epoch 6] Test set: avg. loss: 4.568  (perplexity: 96.37)
+
+Fri, 16 Dec 2016 16:11:58
+[epoch 7] Starting epoch 7
+[epoch 7] Completed in 0:04:15
+[epoch 7] Train set: avg. loss: 4.339  (perplexity: 76.60)
+[epoch 7] Test set: avg. loss: 4.548  (perplexity: 94.46)
+
+Fri, 16 Dec 2016 16:28:35
+[epoch 8] Starting epoch 8
+[epoch 8] Completed in 0:04:19
+[epoch 8] Train set: avg. loss: 4.309  (perplexity: 74.35)
+[epoch 8] Test set: avg. loss: 4.534  (perplexity: 93.17)
+
+Fri, 16 Dec 2016 16:44:45
+[epoch 9] Starting epoch 9
+[epoch 9] Completed in 0:04:12
+[epoch 9] Train set: avg. loss: 4.283  (perplexity: 72.46)
+[epoch 9] Test set: avg. loss: 4.524  (perplexity: 92.21)
+
+Fri, 16 Dec 2016 17:00:50
+[epoch 10] Starting epoch 10
+[epoch 10] Completed in 0:04:10
+[epoch 10] Train set: avg. loss: 4.259  (perplexity: 70.73)
+[epoch 10] Test set: avg. loss: 4.514  (perplexity: 91.32)
+
+Fri, 16 Dec 2016 17:16:47
+[epoch 11] Starting epoch 11
+[epoch 11] Completed in 0:04:09
+[epoch 11] Train set: avg. loss: 4.240  (perplexity: 69.39)
+[epoch 11] Test set: avg. loss: 4.510  (perplexity: 90.89)
+
+Fri, 16 Dec 2016 17:32:37
+[epoch 12] Starting epoch 12
+[epoch 12] Completed in 0:04:03
+[epoch 12] Train set: avg. loss: 4.221  (perplexity: 68.09)
+[epoch 12] Test set: avg. loss: 4.503  (perplexity: 90.30)
+
+Fri, 16 Dec 2016 17:48:09
+[epoch 13] Starting epoch 13
+[epoch 13] Completed in 0:04:02
+[epoch 13] Train set: avg. loss: 4.202  (perplexity: 66.85)
+[epoch 13] Test set: avg. loss: 4.497  (perplexity: 89.73)
+
+Fri, 16 Dec 2016 18:03:40
+[epoch 14] Starting epoch 14
+[epoch 14] Completed in 0:03:58
+[epoch 14] Train set: avg. loss: 4.188  (perplexity: 65.91)
+[epoch 14] Test set: avg. loss: 4.495  (perplexity: 89.54)
+
+Fri, 16 Dec 2016 18:18:56
+[epoch 15] Starting epoch 15
+[epoch 15] Completed in 0:03:58
+[epoch 15] Train set: avg. loss: 4.172  (perplexity: 64.85)
+[epoch 15] Test set: avg. loss: 4.490  (perplexity: 89.08)
+
+Fri, 16 Dec 2016 18:34:15
+[epoch 16] Starting epoch 16
+[epoch 16] Completed in 0:03:55
+[epoch 16] Train set: avg. loss: 4.161  (perplexity: 64.10)
+[epoch 16] Test set: avg. loss: 4.489  (perplexity: 88.99)
+
+Fri, 16 Dec 2016 18:49:29
+[epoch 17] Starting epoch 17
+[epoch 17] Completed in 0:03:54
+[epoch 17] Train set: avg. loss: 4.146  (perplexity: 63.17)
+[epoch 17] Test set: avg. loss: 4.483  (perplexity: 88.51)
+
+Fri, 16 Dec 2016 19:04:12
+[epoch 18] Starting epoch 18
+[epoch 18] Completed in 0:03:37
+[epoch 18] Train set: avg. loss: 4.137  (perplexity: 62.59)
+[epoch 18] Test set: avg. loss: 4.484  (perplexity: 88.61)
+
+Fri, 16 Dec 2016 19:18:21
+[epoch 19] Starting epoch 19
+[epoch 19] Completed in 0:03:37
+[epoch 19] Train set: avg. loss: 4.125  (perplexity: 61.86)
+[epoch 19] Test set: avg. loss: 4.481  (perplexity: 88.30)
+
+Fri, 16 Dec 2016 19:32:28
+[epoch 20] Starting epoch 20
+[epoch 20] Completed in 0:03:36
+[epoch 20] Train set: avg. loss: 4.117  (perplexity: 61.35)
+[epoch 20] Test set: avg. loss: 4.482  (perplexity: 88.41)
+
+Fri, 16 Dec 2016 19:46:37
