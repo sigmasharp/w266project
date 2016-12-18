@@ -1,0 +1,157 @@
+
+In [63]:
+
+with tf.Graph().as_default(), tf.Session() as session:  
+    with tf.variable_scope("model", reuse=None):
+        sm = rnnsm.RNNSM(**model_params)
+        sm.BuildCoreGraph()
+        sm.BuildSamplerGraph()
+        
+    # Load the trained model
+    saver = tf.train.Saver()
+    saver.restore(session, './'+trained_filename)
+    pred = []
+?
+    for s in test_sents:
+        pred.append(seq_predict(sm, session, s, vocab, svocab))
+?
+    non0 = 0
+    correct = 0
+    for i in range(len(test_sents)):
+        if not test_sentis[i][0] == '0':
+            non0 = non0 + 1
+            if pred[i] == test_sentis[i][0]:
+                correct = correct + 1
+print "Test result:", correct, 'out of', non0, ' correct, and total dev is ', len(test_sents)
+print "Accuracy rate is %.2f\n" % (correct * 1.0/ non0)                        
+ Test result: 15780 out of 32431  correct, and total dev is  32513
+Accuracy rate is 0.49
+
+
+Sat, 17 Dec 2016 20:22:16
+WARNING:tensorflow:From <ipython-input-57-26d33fab470b>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+WARNING:tensorflow:From <ipython-input-57-26d33fab470b>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+[epoch 1] Starting epoch 1
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 20:26:14
+[epoch 1] Completed in 0:03:56
+[epoch 1] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.711  (perplexity: 2.04)
+[epoch 1] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.716  (perplexity: 2.05)
+
+[epoch 2] Starting epoch 2
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 20:31:19
+[epoch 2] Completed in 0:03:59
+[epoch 2] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.707  (perplexity: 2.03)
+[epoch 2] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.716  (perplexity: 2.05)
+
+[epoch 3] Starting epoch 3
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 20:36:54
+[epoch 3] Completed in 0:04:26
+[epoch 3] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.703  (perplexity: 2.02)
+[epoch 3] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.716  (perplexity: 2.05)
+
+[epoch 4] Starting epoch 4
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 20:42:24
+[epoch 4] Completed in 0:04:16
+[epoch 4] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.699  (perplexity: 2.01)
+[epoch 4] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.719  (perplexity: 2.05)
+
+[epoch 5] Starting epoch 5
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 20:47:48
+[epoch 5] Completed in 0:04:13
+[epoch 5] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.694  (perplexity: 2.00)
+[epoch 5] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.720  (perplexity: 2.05)
+
+[epoch 6] Starting epoch 6
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 20:53:11
+[epoch 6] Completed in 0:04:14
+[epoch 6] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.691  (perplexity: 1.99)
+[epoch 6] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.720  (perplexity: 2.06)
+
+[epoch 7] Starting epoch 7
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 20:58:34
+[epoch 7] Completed in 0:04:13
+[epoch 7] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.684  (perplexity: 1.98)
+[epoch 7] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.724  (perplexity: 2.06)
+
+[epoch 8] Starting epoch 8
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 21:03:54
+[epoch 8] Completed in 0:04:12
+[epoch 8] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.672  (perplexity: 1.96)
+[epoch 8] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.727  (perplexity: 2.07)
+
+[epoch 9] Starting epoch 9
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 21:09:18
+[epoch 9] Completed in 0:04:13
+[epoch 9] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.663  (perplexity: 1.94)
+[epoch 9] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.726  (perplexity: 2.07)
+
+[epoch 10] Starting epoch 10
+in batch_generator 2211208 2211208 2211200 2211200 2211200 50
+Sat, 17 Dec 2016 21:14:56
+[epoch 10] Completed in 0:04:27
+[epoch 10] in batch_generator 2211208 2211208 2211200 2211200 2211200 100
+Train set: avg. loss: 0.653  (perplexity: 1.92)
+[epoch 10] in batch_generator 1098967 1098967 1098900 1098900 1098900 100
+Test set: avg. loss: 0.738  (perplexity: 2.09)
+
+Sat, 17 Dec 2016 21:16:15
+
+
+In [63]:
+
+with tf.Graph().as_default(), tf.Session() as session:  
+    with tf.variable_scope("model", reuse=None):
+        sm = rnnsm.RNNSM(**model_params)
+        sm.BuildCoreGraph()
+        sm.BuildSamplerGraph()
+        
+    # Load the trained model
+    saver = tf.train.Saver()
+    saver.restore(session, './'+trained_filename)
+    pred = []
+?
+    for s in test_sents:
+        pred.append(seq_predict(sm, session, s, vocab, svocab))
+?
+    non0 = 0
+    correct = 0
+    for i in range(len(test_sents)):
+        if not test_sentis[i][0] == '0':
+            non0 = non0 + 1
+            if pred[i] == test_sentis[i][0]:
+                correct = correct + 1
+print "Test result:", correct, 'out of', non0, ' correct, and total dev is ', len(test_sents)
+print "Accuracy rate is %.2f\n" % (correct * 1.0/ non0)                        
+ Test result: 15780 out of 32431  correct, and total dev is  32513
+Accuracy rate is 0.49

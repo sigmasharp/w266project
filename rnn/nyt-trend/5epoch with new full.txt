@@ -1,0 +1,104 @@
+
+# Load the dataset
+import time
+os.environ['TZ'] = 'US/Pacific'
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+reload(utils)
+V = 10000
+Z = 4
+vocab, svocab, train_ids, train_sids, test_ids, test_sids, dev_ids, dev_sids, test_sents, test_sentis = \
+    utils.load_data("text.full.txt", "sn0p.new.full.txt", train=0.5, test=0.25, V=V, Z=Z, shuffle=True)
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+# Load the dataset
+import time
+os.environ['TZ'] = 'US/Pacific'
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+reload(utils)
+V = 10000
+Z = 4
+vocab, svocab, train_ids, train_sids, test_ids, test_sids, dev_ids, dev_sids, test_sents, test_sentis = \
+    utils.load_data("text.full.txt", "sn0p.new.full.txt", train=0.5, test=0.25, V=V, Z=Z, shuffle=True)
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+Wed, 14 Dec 2016 07:23:43
+Loaded 130051 sentences (4.28041e+06 tokens)
+Loaded 130051 sentiments (130051 tokens)
+Training set: 65025 sentences (2141667 tokens)
+Test set: 32513 sentences (1070297 tokens)
+dev set: 32513 sentences (1068442 tokens)
+Training set: 65025 sentiments (65025 tokens)
+Test set: 32513 sentiments (32513 tokens)
+dev set: 32513 sentiments (32513 tokens)
+Wed, 14 Dec 2016 07:24:50
+
+# Training parameters
+max_time = 20
+batch_size = 50
+learning_rate = 0.5
+keep_prob = 1.0
+num_epochs = 5
+
+# Model parameters
+model_params = dict(V=V, 
+                    H=100,
+                    Z=Z,
+                    num_layers=1)
+
+trained_filename = 'tf_saved_rnnsm_trained'
+
+
+
+
+
+Wed, 14 Dec 2016 07:26:53
+WARNING:tensorflow:From <ipython-input-9-66f68d545e13>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+WARNING:tensorflow:From <ipython-input-9-66f68d545e13>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+[epoch 1] Starting epoch 1
+in batch_generator 2206693 2206693 2206650 2206650 2206650 50
+Wed, 14 Dec 2016 07:31:29
+[epoch 1] Completed in 0:04:34
+[epoch 1] in batch_generator 2206693 2206693 2206600 2206600 2206600 100
+Train set: avg. loss: 0.726  (perplexity: 2.07)
+[epoch 1] in batch_generator 1100956 1100956 1100900 1100900 1100900 100
+Test set: avg. loss: 0.722  (perplexity: 2.06)
+
+[epoch 2] Starting epoch 2
+in batch_generator 2206693 2206693 2206650 2206650 2206650 50
+Wed, 14 Dec 2016 07:37:17
+[epoch 2] Completed in 0:04:32
+[epoch 2] in batch_generator 2206693 2206693 2206600 2206600 2206600 100
+Train set: avg. loss: 0.718  (perplexity: 2.05)
+[epoch 2] in batch_generator 1100956 1100956 1100900 1100900 1100900 100
+Test set: avg. loss: 0.717  (perplexity: 2.05)
+
+[epoch 3] Starting epoch 3
+in batch_generator 2206693 2206693 2206650 2206650 2206650 50
+Wed, 14 Dec 2016 07:43:07
+[epoch 3] Completed in 0:04:36
+[epoch 3] in batch_generator 2206693 2206693 2206600 2206600 2206600 100
+Train set: avg. loss: 0.713  (perplexity: 2.04)
+[epoch 3] in batch_generator 1100956 1100956 1100900 1100900 1100900 100
+Test set: avg. loss: 0.715  (perplexity: 2.04)
+
+[epoch 4] Starting epoch 4
+in batch_generator 2206693 2206693 2206650 2206650 2206650 50
+Wed, 14 Dec 2016 07:48:55
+[epoch 4] Completed in 0:04:30
+[epoch 4] in batch_generator 2206693 2206693 2206600 2206600 2206600 100
+Train set: avg. loss: 0.708  (perplexity: 2.03)
+[epoch 4] in batch_generator 1100956 1100956 1100900 1100900 1100900 100
+Test set: avg. loss: 0.713  (perplexity: 2.04)
+
+[epoch 5] Starting epoch 5
+in batch_generator 2206693 2206693 2206650 2206650 2206650 50
+Wed, 14 Dec 2016 07:54:43
+[epoch 5] Completed in 0:04:34
+[epoch 5] in batch_generator 2206693 2206693 2206600 2206600 2206600 100
+Train set: avg. loss: 0.703  (perplexity: 2.02)
+[epoch 5] in batch_generator 1100956 1100956 1100900 1100900 1100900 100
+Test set: avg. loss: 0.713  (perplexity: 2.04)
+
+Wed, 14 Dec 2016 07:55:58
