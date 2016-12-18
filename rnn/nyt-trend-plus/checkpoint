@@ -1,0 +1,6 @@
+model_checkpoint_path: "tf_saved_rnnsm_trained"
+all_model_checkpoint_paths: "tf_saved_rnnsm-2"
+all_model_checkpoint_paths: "tf_saved_rnnsm-3"
+all_model_checkpoint_paths: "tf_saved_rnnsm-4"
+all_model_checkpoint_paths: "tf_saved_rnnsm-5"
+all_model_checkpoint_paths: "tf_saved_rnnsm_trained"
