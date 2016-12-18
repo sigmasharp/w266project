@@ -1,0 +1,49 @@
+old brute-force
+Mon, 12 Dec 2016 01:44:00
+WARNING:tensorflow:From <ipython-input-51-d0fe0181deed>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+WARNING:tensorflow:From <ipython-input-51-d0fe0181deed>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+[epoch 1] Starting epoch 1
+in batch_generator 2203234 2203234 2203200 2203200 2203200 50
+[epoch 1] Completed in 0:04:03
+[epoch 1] in batch_generator 2203234 2203234 2203200 2203200 2203200 100
+Train set: avg. loss: 0.716  (perplexity: 2.05)
+[epoch 1] in batch_generator 1106723 1106723 1106700 1106700 1106700 100
+Test set: avg. loss: 0.719  (perplexity: 2.05)
+
+[epoch 2] Starting epoch 2
+in batch_generator 2203234 2203234 2203200 2203200 2203200 50
+[epoch 2] Completed in 0:04:35
+[epoch 2] in batch_generator 2203234 2203234 2203200 2203200 2203200 100
+Train set: avg. loss: 0.714  (perplexity: 2.04)
+[epoch 2] in batch_generator 1106723 1106723 1106700 1106700 1106700 100
+Test set: avg. loss: 0.717  (perplexity: 2.05)
+
+[epoch 3] Starting epoch 3
+in batch_generator 2203234 2203234 2203200 2203200 2203200 50
+[epoch 3] Completed in 0:05:08
+[epoch 3] in batch_generator 2203234 2203234 2203200 2203200 2203200 100
+Train set: avg. loss: 0.711  (perplexity: 2.04)
+[epoch 3] in batch_generator 1106723 1106723 1106700 1106700 1106700 100
+Test set: avg. loss: 0.716  (perplexity: 2.05)
+
+[epoch 4] Starting epoch 4
+in batch_generator 2203234 2203234 2203200 2203200 2203200 50
+[epoch 4] Completed in 0:04:33
+[epoch 4] in batch_generator 2203234 2203234 2203200 2203200 2203200 100
+Train set: avg. loss: 0.712  (perplexity: 2.04)
+[epoch 4] in batch_generator 1106723 1106723 1106700 1106700 1106700 100
+Test set: avg. loss: 0.717  (perplexity: 2.05)
+
+[epoch 5] Starting epoch 5
+in batch_generator 2203234 2203234 2203200 2203200 2203200 50
+[epoch 5] Completed in 0:04:05
+[epoch 5] in batch_generator 2203234 2203234 2203200 2203200 2203200 100
+Train set: avg. loss: 0.712  (perplexity: 2.04)
+[epoch 5] in batch_generator 1106723 1106723 1106700 1106700 1106700 100
+Test set: avg. loss: 0.719  (perplexity: 2.05)
+
+Mon, 12 Dec 2016 02:12:34

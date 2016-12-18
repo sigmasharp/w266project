@@ -1,0 +1,111 @@
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+lm_name = 'not'
+trained_filename = './tf_saved/rnnlm_trained' + '_' + lm_name
+idx = 0
+ts_not_for_not = 0.0
+for s in open('not.test.txt'):
+    ts_not_for_not = ts_not_for_not + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+print 'average not_for_not:', ts_not_for_not/idx
+​
+idx = 0
+ts_not_for_hot = 0.0
+for s in open('hot.test.txt'):
+    ts_not_for_hot = ts_not_for_hot + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print 'average not_for_hot:', ts_not_for_hot/idx
+​
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+Mon, 12 Dec 2016 10:27:50
+Mon, 12 Dec 2016 10:44:36
+average not_for_not: -160.20088206
+average not_for_hot: -154.413554547
+Mon, 12 Dec 2016 11:00:16
+In [43]:
+
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+lm_name = 'hot'
+trained_filename = './tf_saved/rnnlm_trained' + '_' + lm_name
+idx = 0
+ts_hot_for_not = 0.0
+for s in open('not.test.txt'):
+    ts_hot_for_not = ts_hot_for_not + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+print 'average hot_for_not:', ts_hot_for_not/idx
+​
+idx = 0
+ts_hot_for_hot = 0.0
+for s in open('hot.test.txt'):
+    ts_hot_for_hot = ts_hot_for_hot + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print 'average hot_for_hot:', ts_hot_for_hot/idx
+​
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+Mon, 12 Dec 2016 11:00:16
+Mon, 12 Dec 2016 11:15:54
+average hot_for_not: -219.612293705
+average hot_for_hot: -211.148201132
+Mon, 12 Dec 2016 11:31:01
+
+
+New:
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+lm_name = 'not.train'
+trained_filename = './tf_saved/rnnlm_trained' + '_' + lm_name
+idx = 0
+ts_not_for_not = 0.0
+for s in open('not.test.txt'):
+    ts_not_for_not = ts_not_for_not + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+print 'average not_for_not:', ts_not_for_not/idx
+​
+idx = 0
+ts_not_for_hot = 0.0
+for s in open('hot.test.txt'):
+    ts_not_for_hot = ts_not_for_hot + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print 'average not_for_hot:', ts_not_for_hot/idx
+​
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+Wed, 14 Dec 2016 00:20:47
+Wed, 14 Dec 2016 00:48:15
+average not_for_not: -196.691923093
+average not_for_hot: -203.287779757
+Wed, 14 Dec 2016 01:42:07
+In [50]:
+
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+lm_name = 'hot.train'
+trained_filename = './tf_saved/rnnlm_trained' + '_' + lm_name
+idx = 0
+ts_hot_for_not = 0.0
+for s in open('not.test.txt'):
+    ts_hot_for_not = ts_hot_for_not + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+print 'average hot_for_not:', ts_hot_for_not/idx
+​
+idx = 0
+ts_hot_for_hot = 0.0
+for s in open('hot.test.txt'):
+    ts_hot_for_hot = ts_hot_for_hot + load_and_score([s.strip().split()], silent=True)
+    idx = idx + 1
+print 'average hot_for_hot:', ts_hot_for_hot/idx
+​
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+​
+Wed, 14 Dec 2016 05:57:10
+Wed, 14 Dec 2016 06:26:17
+average hot_for_not: -192.209787729
+average hot_for_hot: -186.912382692
+Wed, 14 Dec 2016 07:22:30
