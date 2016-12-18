@@ -1,0 +1,180 @@
+Counting '0'
+
+with tf.Graph().as_default(), tf.Session() as session:  
+    with tf.variable_scope("model", reuse=None):
+        sm = rnnsm.RNNSM(**model_params)
+        sm.BuildCoreGraph()
+        sm.BuildSamplerGraph()
+        
+    # Load the trained model
+    saver = tf.train.Saver()
+    saver.restore(session, './'+trained_filename)
+    pred = []
+
+    for s in test_sents:
+        pred.append(seq_predict(sm, session, s, vocab, svocab))
+
+    non0 = 0
+    correct = 0
+    for i in range(len(test_sents)):
+        #if not test_sentis[i][0] == '0':
+        non0 = non0 + 1
+        if pred[i] == test_sentis[i][0]:
+            correct = correct + 1
+print "Test result:", correct, 'out of', non0, ' correct, and total dev is ', len(test_sents)
+print "Accuracy rate is %.2f\n" % (correct * 1.0/ non0)
+
+Test result: 16636 out of 32513  correct, and total dev is  32513
+Accuracy rate is 0.51
+
+
+not counting 0
+with tf.Graph().as_default(), tf.Session() as session:  
+    with tf.variable_scope("model", reuse=None):
+        sm = rnnsm.RNNSM(**model_params)
+        sm.BuildCoreGraph()
+        sm.BuildSamplerGraph()
+        
+    # Load the trained model
+    saver = tf.train.Saver()
+    saver.restore(session, './'+trained_filename)
+    pred = []
+
+    for s in test_sents:
+        pred.append(seq_predict(sm, session, s, vocab, svocab))
+
+    non0 = 0
+    correct = 0
+    for i in range(len(test_sents)):
+        if not test_sentis[i][0] == '0':
+            non0 = non0 + 1
+            if pred[i] == test_sentis[i][0]:
+                correct = correct + 1
+print "Test result:", correct, 'out of', non0, ' correct, and total dev is ', len(test_sents)
+print "Accuracy rate is %.2f\n" % (correct * 1.0/ non0)
+
+Test result: 2311 out of 11547  correct, and total dev is  32513
+Accuracy rate is 0.20
+
+
+# Load the dataset
+import time
+os.environ['TZ'] = 'US/Pacific'
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+reload(utils)
+V = 10000
+Z = 4
+vocab, svocab, train_ids, train_sids, test_ids, test_sids, dev_ids, dev_sids, test_sents, test_sentis = \
+    utils.load_data("text.full.txt", "sn0p.new.full.txt", train=0.5, test=0.25, V=V, Z=Z, shuffle=True)
+print time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+
+Sat, 17 Dec 2016 23:43:10
+Loaded 130051 sentences (4.28041e+06 tokens)
+Loaded 130051 sentiments (130051 tokens)
+Training set: 65025 sentences (2140632 tokens)
+Test set: 32513 sentences (1069635 tokens)
+dev set: 32513 sentences (1070139 tokens)
+Training set: 65025 sentiments (65025 tokens)
+Test set: 32513 sentiments (32513 tokens)
+dev set: 32513 sentiments (32513 tokens)
+Sat, 17 Dec 2016 23:43:51
+
+Sat, 17 Dec 2016 23:45:16
+WARNING:tensorflow:From <ipython-input-47-26d33fab470b>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+WARNING:tensorflow:From <ipython-input-47-26d33fab470b>:19 in <module>.: initialize_all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Use `tf.global_variables_initializer` instead.
+[epoch 1] Starting epoch 1
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sat, 17 Dec 2016 23:49:00
+[epoch 1] Completed in 0:03:42
+[epoch 1] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.922  (perplexity: 2.51)
+[epoch 1] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.936  (perplexity: 2.55)
+
+[epoch 2] Starting epoch 2
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sat, 17 Dec 2016 23:53:44
+[epoch 2] Completed in 0:03:46
+[epoch 2] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.897  (perplexity: 2.45)
+[epoch 2] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.926  (perplexity: 2.52)
+
+[epoch 3] Starting epoch 3
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sat, 17 Dec 2016 23:58:32
+[epoch 3] Completed in 0:03:48
+[epoch 3] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.866  (perplexity: 2.38)
+[epoch 3] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.912  (perplexity: 2.49)
+
+[epoch 4] Starting epoch 4
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sun, 18 Dec 2016 00:03:31
+[epoch 4] Completed in 0:04:00
+[epoch 4] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.849  (perplexity: 2.34)
+[epoch 4] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.909  (perplexity: 2.48)
+
+[epoch 5] Starting epoch 5
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sun, 18 Dec 2016 00:08:49
+[epoch 5] Completed in 0:04:15
+[epoch 5] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.829  (perplexity: 2.29)
+[epoch 5] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.896  (perplexity: 2.45)
+
+[epoch 6] Starting epoch 6
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sun, 18 Dec 2016 00:14:07
+[epoch 6] Completed in 0:04:16
+[epoch 6] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.809  (perplexity: 2.25)
+[epoch 6] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.899  (perplexity: 2.46)
+
+[epoch 7] Starting epoch 7
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sun, 18 Dec 2016 00:19:31
+[epoch 7] Completed in 0:04:20
+[epoch 7] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.796  (perplexity: 2.22)
+[epoch 7] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.902  (perplexity: 2.46)
+
+[epoch 8] Starting epoch 8
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sun, 18 Dec 2016 00:24:56
+[epoch 8] Completed in 0:04:23
+[epoch 8] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.772  (perplexity: 2.16)
+[epoch 8] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.907  (perplexity: 2.48)
+
+[epoch 9] Starting epoch 9
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sun, 18 Dec 2016 00:30:25
+[epoch 9] Completed in 0:04:26
+[epoch 9] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.762  (perplexity: 2.14)
+[epoch 9] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.909  (perplexity: 2.48)
+
+[epoch 10] Starting epoch 10
+in batch_generator 2205658 2205658 2205650 2205650 2205650 50
+Sun, 18 Dec 2016 00:35:54
+[epoch 10] Completed in 0:04:27
+[epoch 10] in batch_generator 2205658 2205658 2205600 2205600 2205600 100
+Train set: avg. loss: 0.749  (perplexity: 2.12)
+[epoch 10] in batch_generator 1102653 1102653 1102600 1102600 1102600 100
+Test set: avg. loss: 0.914  (perplexity: 2.49)
+
+Sun, 18 Dec 2016 00:36:57
+              

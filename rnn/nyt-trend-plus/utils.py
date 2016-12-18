@@ -46,8 +46,8 @@ def canonicalize_words(words, **kw):
 ##
 # Data loading functions
 
-def get_sents(): 
-    return [word_tokenize(unicode(s.decode('utf-8').strip())) for s in open('./text.full.txt')],[word_tokenize(s.strip()) for s in open('./sn0p.full.txt')]
+def get_sents(name, sname): 
+    return [word_tokenize(unicode(s.decode('utf-8').strip())) for s in open('./'+name)],[word_tokenize(s.strip()) for s in open('./'+sname)]
                           
 def build_vocab(sents, V=10000):
     words = flatten(sents)
@@ -117,7 +117,7 @@ def preprocess_sent_sentis(sents, sentis, vocab, svocab):
 # Use this function
 def load_data(name, sname, train=0.5, test=0.25, V=10000, Z=8, shuffle=True):
     """Load a named corpus and split train/test along sentences."""
-    sents, sentis = get_sents()   
+    sents, sentis = get_sents(name, sname)   
     vocab = build_vocab(sents, V)
     svocab = vocabulary.Vocabulary(True)
     
