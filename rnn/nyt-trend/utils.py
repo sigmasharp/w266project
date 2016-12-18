@@ -46,8 +46,8 @@ def canonicalize_words(words, **kw):
 ##
 # Data loading functions
 
-def get_sents(): 
-    return [word_tokenize(unicode(s.decode('utf-8').strip())) for s in open('./text.full.txt')],[word_tokenize(s.strip()) for s in open('./sn0p.full.txt')]
+def get_sents(name, sname): 
+    return [word_tokenize(unicode(s.decode('utf-8').strip())) for s in open('./'+name)],[word_tokenize(s.strip()) for s in open('./'+sname)]
                           
 def build_vocab(sents, V=10000):
     words = flatten(sents)
@@ -94,7 +94,7 @@ def get_train_test_dev_sents(sents, sentis, train=0.5, test=0.25, shuffle=True):
     fmt = (len(dev_sentis), sum(map(len, dev_sentis)))
     print "dev set: %d sentiments (%d tokens)" % fmt
     
-    return train_sents, test_sents, dev_sents, train_sentis, test_sentis, dev_sentis, test_sents, test_sentis
+    return train_sents, test_sents, dev_sents, train_sentis, test_sentis, dev_sentis
 
 def preprocess_sent_sentis(sents, sentis, vocab, svocab):
     # Add sentence boundaries, canonicalize, and handle unknowns
@@ -117,16 +117,16 @@ def preprocess_sent_sentis(sents, sentis, vocab, svocab):
 # Use this function
 def load_data(name, sname, train=0.5, test=0.25, V=10000, Z=8, shuffle=True):
     """Load a named corpus and split train/test along sentences."""
-    sents, sentis = get_sents()   
+    sents, sentis = get_sents(name, sname)   
     vocab = build_vocab(sents, V)
     svocab = vocabulary.Vocabulary(True)
     
-    train_sents, test_sents, dev_sents, train_sentis, test_sentis, dev_sentis, test_sents_o, test_sentis_o = get_train_test_dev_sents(sents, sentis, train, test, shuffle)
+    train_sents, test_sents, dev_sents, train_sentis, test_sentis, dev_sentis = get_train_test_dev_sents(sents, sentis, train, test, shuffle)
     train_ids, train_sids = preprocess_sent_sentis(train_sents, train_sentis, vocab, svocab)
     test_ids, test_sids = preprocess_sent_sentis(test_sents, test_sentis, vocab, svocab)
     dev_ids, dev_sids = preprocess_sent_sentis(dev_sents, dev_sentis, vocab, svocab)
 
-    return vocab, svocab, train_ids, train_sids, test_ids, test_sids, dev_ids, dev_sids, test_sents_o, test_sentis_o
+    return vocab, svocab, train_ids, train_sids, test_ids, test_sids, dev_ids, dev_sids, train_sents, train_sentis, test_sents, test_sentis, dev_sents, dev_sentis
 
 ##
 # Use this function
